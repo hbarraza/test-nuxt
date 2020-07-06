@@ -5,7 +5,7 @@
             <h3 class="title">Nuevo contador</h3>
             <div class="contenedor-valores">
                 <span>Nombre</span>
-                <input type="text" v-model="nombreContador" class="nombre" placeholder="Ingresa un nombre">
+                <input type="text" v-model="nombreContador" class="nombre" placeholder="Ingresa un nombre" ref="nomContador">
                 <span>Valor</span>
                 <input type="number" v-model="valorContador" class="valor">
             </div>
@@ -65,6 +65,10 @@ export default {
             this.errores = false;
             this.$emit('cerrarModal');
         }
+    },
+    mounted: function(){
+        this.$store.commit('todos/cargar');
+        this.$refs.nomContador.focus();
     }
     
 }

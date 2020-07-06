@@ -38,13 +38,15 @@ export default {
     name: 'Header',
     data() {
         return {
-            tipoFiltro: '',
-            valorFiltro: null,
+            tipoFiltro: this.$store.getters['todos/estadoTipoFiltro'],
+            valorFiltro: this.$store.getters['todos/estadoValorFiltro'],
         }
     },
     computed: {
         ...mapGetters({
-            originalGuardado: 'todos/originalGuardado'
+            originalGuardado: 'todos/originalGuardado',
+            estadoTipoFiltro: 'todos/estadoTipoFiltro',
+            estadoValorFiltro: 'todos/estadoValorFiltro'
         }),
     },
     methods: {
@@ -62,13 +64,14 @@ export default {
             this.$store.commit('todos/aplicarFiltro', { tipoFiltro, valorFiltro })
         },
         limpiarFiltros() {
-
-        },
-        guardarActual() {
-            // Store
-            
+            this.tipoFiltro = '';
+            this.valorFiltro = null;
+            this.$store.commit('todos/limpiarFiltros');
+            this.$store.commit('todos/cargar');
         }
-
+    },
+    updated: function(){
+        this.$store.commit('todos/cargarFiltros')
     }
 }
 </script>

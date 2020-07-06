@@ -1,5 +1,8 @@
 <template>
     <div class="barra">
+        <div class="contenedor-salvar">
+            <button class="boton-salvar" @click="salvarLista" title="Salvar lista">Salvar lista</button>
+        </div>
         <div class="contenedor-sumatoria">
             <img class="logo-sumatoria" src="../assets/suma.png" />
             <span class="sumatoria">{{ sumatoria }}</span>
@@ -16,6 +19,11 @@ export default {
     computed: {
         sumatoria() {
             return this.$store.getters['todos/sumatoriaContadores']
+        }
+    },
+    methods: {
+        salvarLista(){
+            this.$store.commit('todos/salvar');
         }
     }
 }
@@ -64,5 +72,25 @@ export default {
     width: 3rem;
     margin: 0 0.5rem;
     font-weight: bold;
+}
+
+.contenedor-salvar {
+    width: 40%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.boton-salvar {
+    margin: 0.5rem;
+    background-color: #009a9a;
+    color: white;    
+}
+
+.boton-salvar:hover {
+    cursor: pointer;
+    background-color: teal;
 }
 </style>

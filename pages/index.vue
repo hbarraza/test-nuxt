@@ -24,8 +24,8 @@
         </div>
         <div class="inicial" v-else>
             <button
-                class="boton-agregar"
-                disabled>Limite de contadores</button>
+                class="boton-agregar-limite"
+                disabled>Limite de contadores alcanzado</button>
         </div>
 
         <Modal v-if="showModal" @cerrarModal="cerrarModal"></Modal>
@@ -72,6 +72,9 @@ export default {
         cerrarModal() {
             this.showModal = false;
         }
+    },
+    mounted: function(){
+        this.$store.commit('todos/cargar');
     }
 }
 </script>
@@ -118,30 +121,47 @@ export default {
     cursor: pointer;
 }
 
+.boton-agregar-limite {
+    width: 12rem;
+    height: 3rem;
+    border-radius: 1rem;
+    border: 0;
+    background-color: #9d0000;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.4rem;
+}
+
 .animated {
- -webkit-animation-duration: 5s;
- animation-duration: 5s;
- -webkit-animation-fill-mode: both;
- animation-fill-mode: both;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
+
 @-webkit-keyframes flash {
- 0%, 50%, 100% {
- opacity: 1;
- }
-25%, 75% {
- opacity: 0;
- }
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+
+    25%, 75% {
+        opacity: 0;
+    }
 }
+
 @keyframes flash {
- 0%, 50%, 100% {
- opacity: 1;
- }
-25%, 75% {
- opacity: 0;
- }
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+
+    25%, 75% {
+        opacity: 0;
+    }
 }
+
 .flash {
- -webkit-animation-name: flash;
- animation-name: flash;
+    -webkit-animation-name: flash;
+    animation-name: flash;
 }
 </style>

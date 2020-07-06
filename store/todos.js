@@ -1,11 +1,16 @@
 export const state = () => ({
     list: [],
-    originalGuardado: false
+    originalGuardado: false,
+    filtroAplicado: {
+        tipoFiltro: '',
+        valorFiltro: null
+    }
 })
 
 export const mutations = {
     agregarContador(state, { nuevoContador }) {
         state.list.push(nuevoContador)
+        mutations.salvar(state)
     },
     eliminarContador (state, { contador }) {
         state.list.splice(state.list.indexOf(contador), 1)
@@ -65,6 +70,27 @@ export const mutations = {
                 state.list = state.list.filter( contador => { return contador.valor <= parseInt(valorFiltro)} )
                 break;
         }
+
+        mutations.salvarFiltro(state, { tipoFiltro, valorFiltro });
+    },
+    salvarFiltro(state, { tipoFiltro, valorFiltro }) {
+        state.filtroAplicado.tipoFiltro = tipoFiltro;
+        state.filtroAplicado.valorFiltro = valorFiltro;
+        sessionStorage.setItem("filtrosAplicados", JSON.stringify(state.filtroAplicado));
+    },
+    cargarFiltros(state) {
+        let filtrosAplicados = JSON.parse(sessionStorage.getItem("filtrosAplicados"));
+        if (!filtrosAplicados) {
+            state.filtroAplicado.tipoFiltro = '';
+            state.filtroAplicado.valorFiltro = null;
+        } else {
+            state.filtroAplicado = filtrosAplicados;
+        }
+    },
+    limpiarFiltros(state) {
+        state.filtroAplicado.tipoFiltro = '';
+        state.filtroAplicado.valorFiltro = null;
+        sessionStorage.removeItem("filtrosAplicados");
     }
 }
 
@@ -82,5 +108,11 @@ export const getters = {
     },
     originalGuardado(state) {
         return state.originalGuardado;
+    },
+    estadoTipoFiltro(state) {
+        return state.filtroAplicado.tipoFiltro;
+    },
+    estadoValorFiltro(state) {
+        return state.filtroAplicado.valorFiltro;
     }
 }
