@@ -1,0 +1,63 @@
+- Aplicacion para administrar una lista de contadores.
+    -Debe tener un Componente "Contador" (tiene un nombre y un número que representa el valor del contador)
+        -El contador puede aumentar o disminuir su valor utilizando 2 botones (uno para sumar 1 al contador y otro para restar 1 al contador).
+        -El contador debe tener un boton para eliminar el contador permanentemente.
+    
+    -Debe existir un boton para agregar contadores al listado (debe desplegar un modal/popup/dialogo)
+        -> modal debe solicitar nombre del contador + un boton para confirmar agregar un contador a la lista + boton para cancelar la acción de crear contador
+    
+    -La app debe poder ordenar los contadores de la lista, por nombre del contador (ascendente y descendente) o por valor actual (ascendente y descendente)
+    -La app debe tener una opción de filtro a los contadores mayores o menores a un número x. y poder borrar el filtro aplicado.
+    -La app debe tener un footer donde muestre la suma de todos los contadores creados en la app, independiente de los filtros aplicados.
+ 
+-Consideraciones:
+    - No se pueden crear mas de 20 contadores ok
+    - Al iniciar la aplicación la primera vez, la lista de contadores debe estar vacía ok
+    - Ningún contador puede ser menor a 0 ok
+    - Ningún contador puede ser mayor a 20 ok
+    - Deshabiltar el botón de agregar contadores cuando se llegue al tope máximo de contadores ok
+    - Un contador no puede tener un nombre vacío ok
+    - Habilitar el botón agregar contadores si la condición anterior no se cumple ok
+    - Si la lista de contadores esta vacía, ofrecer la opción de crear un nuevo contador ok
+    - El nombre del contador no puede tener mas de 20 caracteres ok
+    - Utilizar localStorage en conjunto con el State para guardar los contadores creados
+    - Utilizar sessionStorage en conjunto con el State para dejar guardadas las preferencias de los filtros aplicados
+
+-Tecnología:
+    La aplicación debe estar desarrollada utilizando NUXT (https://nuxtjs.org/), se recomienda utilizar el CLI del framework (https://nuxtjs.org/guide/installation)
+    El valor de los contadores así como todos los estados de la aplicación deben ser manejados utilizando Vuex. 
+    No está permitido utilizar frameworks de estilo, tales como bootstrap, vuetify, bulma etc
+    No esta permitido utilizar templating engines como PUG o JADE
+    Cualquier otro package, plugin, componente de NPM aparte de lo anterior esta permitido
+
+Estructura del proyecto a grandes rasgos:
+-layout
+-index
+-header
+    odernar-contadores
+    filtrar-contadores
+-listador-de-contadores
+    contador
+-footer
+    suma-de-contadores
+-modal-agregrar-contador ( Modal Fixed encima de todo )
+
+
+Se evaluará
+  Uso correcto de state management
+  Uso correcto de las estructuras de NUXT
+  Utilización de functional programming
+  Correcta aplicación de TAGs HTML
+  Correcta utilización de CSS
+  Uso correcto en encapsulamiento de componentes
+
+Suma puntos
+    - Mejorar la interfaz propuesta (En posicionamiento, colores, UX, etc)
+    - Aplicar transiciones al listado de contadores y en general a la interfaz completa.
+    - Que la aplicación sea Responsive.
+    - Agregar un buscador de contadores por nombre, que trabaje en conjunto con los filtros
+
+Deploy
+    Cuando la Aplicación NUXT esté terminada, cargarla en Heroku (https://www.heroku.com/)
+    (https://nuxtjs.org/faq/heroku-deployment/)
+    Ademas enviar un Repositorio de Github con el código fuente
